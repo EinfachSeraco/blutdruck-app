@@ -18,9 +18,13 @@ struct ContentView: View {
     @State private var showResetAlert = false
     @State private var isSettingsOpen = false
     
-    // Gespeicherte Einstellungen (Farbschema & Sprache)
+    // Gespeicherte Einstellungen (Farbschema, Sprache & Berichtszeitraum)
     @AppStorage("selectedColorScheme") private var selectedColorScheme = 0
     @AppStorage("selectedLanguage") private var selectedLanguage = 0
+    @AppStorage("reportPeriodDays") private var reportPeriodDays = 7 // Standardmäßig 7 Tage
+    
+    // Optionen für den Berichtszeitraum Picker
+    let periodOptions = [3, 5, 7, 14, 30, 90]
     
     // Dauerhaft gespeicherte Profil-Metadaten für das PDF
     @AppStorage("profileName") private var profileName = ""
@@ -186,6 +190,28 @@ struct ContentView: View {
                                                 .textFieldStyle(.roundedBorder)
                                             TextField(selectedLanguage == 0 ? "Geburtsdatum (z.B. 10. Aug. 1990)" : "Birthdate (e.g. Aug 10, 1990)", text: $profileBirthdate)
                                                 .textFieldStyle(.roundedBorder)
+                                        }
+                                        
+                                        Divider()
+                                        
+                                        // NEU: Berichtszeitraum für den Arzt
+                                        VStack(alignment: .leading, spacing: 6) {
+                                            Text(selectedLanguage == 0 ? "Berichtszeitraum (Standard)" : "Report Period (Default)")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                            
+                                            Picker("Zeitraum", selection: $reportPeriodDays) {
+                                                ForEach(periodOptions, id: \.self) { days in
+                                                    Text("\(days) \(selectedLanguage == 0 ? "Tage" : "Days")")
+                                                        .tag(days)
+                                                }
+                                            }
+                                            .pickerStyle(.menu)
+                                            .labelsHidden()
+                                            
+                                            Text(selectedLanguage == 0 ? "Bestimmt die Dauer des Protokolls im Graphen, Verlauf und PDF-Export." : "Determines the protocol length in chart, history, and PDF export.")
+                                                .font(.caption2)
+                                                .foregroundColor(.secondary)
                                         }
                                         
                                         Divider()
@@ -416,7 +442,12 @@ struct ContentView: View {
     
     @MainActor
     private func generatePDFReport() -> URL {
-        let reportView = PDFReportView(measurements: measurements, language: selectedLanguage, profileName: profileName, profileBirthdate: profileBirthdate)
+        // Berechne den gefilterten Zeitraum für den Arztbericht
+        let calendar = Calendar.current
+        let filterStartDate = calendar.date(byAdding: .day, value: -reportPeriodDays, to: Date()) ?? Date()
+        let filteredMeasurements = measurements.filter { $0.timestamp >= filterStartDate }
+        
+        let reportView = PDFReportView(measurements: filteredMeasurements, language: selectedLanguage, profileName: profileName, profileBirthdate: profileBirthdate)
         let renderer = ImageRenderer(content: reportView)
         let path = FileManager.default.temporaryDirectory.appendingPathComponent("Blutdruck_Bericht.pdf")
         

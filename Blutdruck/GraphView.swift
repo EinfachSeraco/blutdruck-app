@@ -75,7 +75,7 @@ struct GraphView: View {
                         )
                         .foregroundStyle(entry.systole < 135 ? Color.green : Color.red)
                         .annotation(position: .top) {
-                            Text("\(entry.systole)")
+                            Text("\(Int(entry.systole))")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
                         }
@@ -96,7 +96,7 @@ struct GraphView: View {
                         )
                         .foregroundStyle(entry.diastole < 85 ? Color.green : Color.blue)
                         .annotation(position: .bottom) {
-                            Text("\(entry.diastole)")
+                            Text("\(Int(entry.diastole))")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
                         }
@@ -106,8 +106,7 @@ struct GraphView: View {
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .day)) { value in
                         AxisGridLine()
-                        // KORREKTUR: .twoDigits löst den Fehler aus image_bb23db.png
-                        AxisValueLabel(format: .dateTime.day().month(.twoDigits))
+                        AxisValueLabel(format: .dateTime.day(.twoDigits).month(.twoDigits))
                     }
                 }
                 .padding()
@@ -115,16 +114,16 @@ struct GraphView: View {
                 // --- LEGENDE ---
                 HStack(spacing: 20) {
                     Spacer()
-                    HStack {
-                        Circle().fill(Color.red).frame(width: 10, height: 10)
+                    HStack(spacing: 4) {
+                        Circle().fill(Color.red).frame(width: 8, height: 8)
                         Text(selectedLanguage == 0 ? "Systole" : "Systole").font(.caption)
                     }
-                    HStack {
-                        Circle().fill(Color.blue).frame(width: 10, height: 10)
+                    HStack(spacing: 4) {
+                        Circle().fill(Color.blue).frame(width: 8, height: 8)
                         Text(selectedLanguage == 0 ? "Diastole" : "Diastole").font(.caption)
                     }
-                    HStack {
-                        Circle().fill(Color.green).frame(width: 10, height: 10)
+                    HStack(spacing: 4) {
+                        Circle().fill(Color.green).frame(width: 8, height: 8)
                         Text(selectedLanguage == 0 ? "Im Zielbereich" : "In Target").font(.caption)
                     }
                     Spacer()
@@ -138,6 +137,26 @@ struct GraphView: View {
 }
 
 #Preview {
-    GraphView()
-        .modelContainer(for: BloodPressure.self, inMemory: true)
+    // Verwendung einer anonymen Funktion, um Setup-Logik sauber auszuführen
+    let container: ModelContainer = {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: BloodPressure.self, configurations: config)
+        
+        let today = Date()
+        let sampleData = [
+            BloodPressure(systole: 120, diastole: 80, timestamp: today.addingTimeInterval(-86400 * 2), note: nil),
+            BloodPressure(systole: 140, diastole: 88, timestamp: today.addingTimeInterval(-86400 * 1), note: nil),
+            BloodPressure(systole: 130, diastole: 84, timestamp: today, note: nil)
+        ]
+        
+        for sample in sampleData {
+            container.mainContext.insert(sample)
+        }
+        return container
+    }()
+    
+    NavigationStack {
+        GraphView()
+            .modelContainer(container)
+    }
 }
