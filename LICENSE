@@ -1,0 +1,93 @@
+Blutdruck Pro App
+Copyright (c) 2026 Marco Sergio
+Alle Rechte vorbehalten. / All rights reserved.
+
+================================================================================
+DEUTSCH
+================================================================================
+
+1. Rechteinhaber
+   Diese Software einschließlich Quellcode, Benutzeroberfläche, Grafiken, Texten,
+   Übersetzungen und Dokumentation (zusammen die "Software") ist urheberrechtlich
+   geschützt. Alle Rechte liegen ausschließlich bei Marco Sergio.
+
+2. Keine Nutzungsrechte ohne Erlaubnis
+   Ohne vorherige ausdrückliche schriftliche Genehmigung des Rechteinhabers ist es
+   nicht gestattet, die Software ganz oder in Teilen
+   - zu kopieren, zu vervielfältigen oder zu veröffentlichen,
+   - zu verändern, zu bearbeiten oder abgeleitete Werke daraus zu erstellen,
+   - zu verbreiten, zu verkaufen, zu vermieten, zu verleihen oder unterzulizenzieren,
+   - zurückzuentwickeln (Reverse Engineering), zu dekompilieren oder zu disassemblieren,
+     soweit dies nicht durch zwingendes Recht ausdrücklich erlaubt ist.
+
+3. Nutzung der App
+   Die Nutzung der veröffentlichten App (z. B. über den Apple App Store) richtet sich
+   nach den jeweiligen Nutzungsbedingungen der Vertriebsplattform. Diese Lizenz
+   gewährt darüber hinaus keine Rechte am Quellcode.
+
+4. Kein Medizinprodukt
+   Die Software dient ausschließlich der persönlichen Dokumentation von
+   Blutdruckwerten. Sie ist kein Medizinprodukt, stellt keine Diagnose und ersetzt
+   keine ärztliche Beratung, Untersuchung oder Behandlung. Die Einstufung der Werte
+   dient nur der Orientierung.
+
+5. Gewährleistung und Haftung
+   Die Software wird "wie besehen" ohne jegliche Gewährleistung bereitgestellt.
+   Der Rechteinhaber haftet nur für Vorsatz und grobe Fahrlässigkeit sowie bei
+   Verletzung von Leben, Körper oder Gesundheit und nach dem Produkthaftungsgesetz.
+   Im Übrigen ist die Haftung, soweit gesetzlich zulässig, ausgeschlossen.
+
+6. Drittanbieter
+   Verwendete Frameworks von Apple (z. B. SwiftUI, SwiftData, Swift Charts,
+   WidgetKit) unterliegen den Lizenzbedingungen von Apple Inc. und sind nicht
+   Gegenstand dieser Lizenz.
+
+7. Anwendbares Recht
+   Es gilt das Recht der Bundesrepublik Deutschland.
+
+Kontakt für Anfragen zu Nutzungsrechten: info@heeseberg-create-it.de
+
+================================================================================
+ENGLISH
+================================================================================
+
+1. Ownership
+   This software, including its source code, user interface, graphics, texts,
+   translations and documentation (together the "Software"), is protected by
+   copyright. All rights are held exclusively by Marco Sergio.
+
+2. No rights without permission
+   Without the prior express written permission of the copyright holder, you may
+   not, in whole or in part,
+   - copy, reproduce or publish the Software,
+   - modify, adapt or create derivative works of the Software,
+   - distribute, sell, rent, lend or sublicense the Software,
+   - reverse engineer, decompile or disassemble the Software, except where
+     expressly permitted by mandatory law.
+
+3. Use of the app
+   Use of the published app (e.g. via the Apple App Store) is governed by the terms
+   of the respective distribution platform. This license grants no further rights
+   to the source code.
+
+4. Not a medical device
+   The Software is intended solely for personal record-keeping of blood pressure
+   readings. It is not a medical device, does not provide a diagnosis and does not
+   replace medical advice, examination or treatment. The classification of readings
+   is for orientation only.
+
+5. Warranty and liability
+   The Software is provided "as is", without warranty of any kind. The copyright
+   holder is liable only for intent and gross negligence, for injury to life, body
+   or health, and under the German Product Liability Act. Otherwise, liability is
+   excluded to the extent permitted by law.
+
+6. Third parties
+   Apple frameworks used (e.g. SwiftUI, SwiftData, Swift Charts, WidgetKit) are
+   subject to the license terms of Apple Inc. and are not covered by this license.
+
+7. Governing law
+   The laws of the Federal Republic of Germany apply. In case of doubt, the German
+   version prevails.
+
+Contact for requests regarding usage rights: info@heeseberg-create-it.de
